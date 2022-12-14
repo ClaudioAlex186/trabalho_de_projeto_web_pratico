@@ -1,42 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt">
 <head>
-    <meta charset="UTF-8">    <title>Trabalho de projeto Web pratico</title>
+    <meta charset="UTF-8">    
+    <title>Wheater.IO</title>
     <link rel="stylesheet" type="text/css" href="css.css">
+    <script src="jquery-3.6.1.min.js"></script>
+    <style>
+        table, th, td {
+            border:1px solid black;
+        }
+    </style>
 </head>
 <body>
-    
     <header>
-        
-        <h2>Weather.io</h2>
+      <h2>Weather.io</h2>
         <img src="logo web.jpg" height="70vh" class="icon"></header>
-
         <div class="nav">
-            
             <a href="Forecast.html">Forecast</a>
             <a href="Favoritos.html">Favoritos</a>
             <a href="Detalhes.html">Detalhes</a>
             <a href=""></a>
         </div>
-        
     </header>
     
-    
-    <div class="row"></div>
-        <div class="col"> </div>
+    <!--Secção de cima-->
+    <div class ="espaco"></div>
 
-        <div class="col"> </div>
-        <div class="col"> </div>
-        <div class="col">exemplo</div>
-
-        <div class="col">exemplo</div>
-        <div class="col">2</div>
-        <div class="col">3</div>
-
-    </div>
+    <!--Corpo do Site-->
+    <div class="container">
+    <h1>TeSP - PSI - Programação Web-Cliente</h1>
+    <input id="Input" type="text">
+    <button id="Sistema">Cº</button>
+    <button id="Pesquisa">Pesquisar</button>
+    <table class="center"id="tabela_pesquisa">
+        <tr>
+            <th>Cidade</th>
+            <th>Temperatura</th>
+            <th>Tempo</th>
+            <th>Vento</th>
+            <th>Pressão Atmosférica</th>
+            <th>Humidade</th>
+            <th>Coordenadas Geográficas</th>
+        </tr>
+        <tr>
+            <td class="cidade"></td>
+            <td class = "temperatura"></td>
+            <td class = "tempo"></td>
+            <td class = "vento"></td>
+            <td class = "press_atm"></td>
+            <td class = "hum"></td>
+            <td class = "cords"></td>
+        </tr>
+    </table>
+  </div>
+   
+    <!--Secção de baixo-->
     <footer>
         <h4>&copy; ESTG</h4>
     </footer>
 
 </body>
 </html>
+
+<script>
+    var x = "metric"
+    buscar("leiria", x)
+    $("#Pesquisa").click(function() {
+      buscar($("#Input").val(), x)
+    });
+    $("#Sistema").click(function() {
+      if ($("#Sistema").html() == "Fº"){
+        $("#Sistema").html("Cº");
+        x = "metric"
+      }else{
+        $("#Sistema").html("Fº");
+        x = "imperial"
+      }
+      buscar($('.cidade').html(), x)
+    });
+    function buscar($city, $units) {
+      fetch('https://api.openweathermap.org/data/2.5/weather?q='+$city+'&appid=3e4ffbfb52c89c9cf550ec62412ac75c&units='+$units+'&lang=pt')
+        .then(x => x.json())
+        .then(y => {
+          $('.cidade').html(y['name']);
+          $('.temperatura').html(y['main']['temp']);
+          $('.tempo').html(y['weather'][0]['description']);
+          $('.vento').html(y['wind']['speed'] + " Km / h");
+          $('.press_atm').html(y['main']['pressure']);
+          $('.hum').html(y['main']['humidity'] + "%");
+          $('.cords').html(y['coord']['lon']);
+        });
+    ;}
+
+  </script>

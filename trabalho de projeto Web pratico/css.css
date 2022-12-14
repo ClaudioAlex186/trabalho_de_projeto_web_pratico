@@ -19,12 +19,10 @@ header{
     height: 10vh;
 }
 
-
 header h2{
     left: 85px;
     position: absolute;
     margin-top: 20px;
-
 }
 footer{
     height:  15vh;
@@ -41,6 +39,35 @@ footer h2{
     top:20px;
     color:white;
     text-decoration: none;
-    margin-right: 20px;
-     
+    margin-right: 20px;    
+}
+
+.espaco{
+    margin-top: 10vh;
+}
+
+.container{
+    text-align: center;
+    justify-content: center;
+}
+
+table {
+    justify-content: center;
+}   
+
+.center{
+    margin-left:auto;
+    margin-right:auto;
+    text-align: center;
+    border-spacing: 0ch;
+    background: rgba(60, 255, 252, 0.12);
+    box-shadow: 0 2px 13px rgb(rgb(4, 4, 4), rgb(99, 100, 99), rgb(250, 250, 252)255, 255, 255);
+    overflow: hidden;
+
+}
+
+th{
+    background: rgba(255, 119, 0, 0.282);
+    text-transform: uppercase;
+    font-family: Roboto,sans-serif;
 }
